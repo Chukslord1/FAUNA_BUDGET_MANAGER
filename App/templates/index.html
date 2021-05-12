@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Fauna Budget Calculator
+  </title>
+  <meta content="width=device-width" name="viewport"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/emojione/1.3.0/assets/css/emojione.min.css" rel="stylesheet"/>
+  <link href="{% static 'style.css' %}" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- partial:index.partial.html -->
+  <div class="container-fluid center-meh-boi">
+    {% for message in messages %}
+    <center><li style="color:danger;">{{message}}</li><center>
+    {% endfor %}
+   <div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+     <div class="box-of-stuff">
+      <form method="POST">
+        {% csrf_token %}
+       <input class="form-control input-lg" id="income" placeholder="Monthly Income" name="income" type="text"/>
+       <input class="form-control input-lg" id="rent" placeholder="Rent" name="rent" type="text"/>
+       <input class="form-control input-lg" id="food" placeholder="Food"  name="food" type="text"/>
+       <input class="form-control input-lg" id="utilities" placeholder="Utilities" name="utilities" type="text"/>
+       <input class="form-control input-lg" id="insurance" placeholder="Insurance" name="insurance" type="text"/>
+       <input class="form-control input-lg" id="date" placeholder="date" name="date" type="month"/>
+       <button class="btn btn-primary btn-lg btn-block" type="submit">
+        Submit
+       </button>
+      </form>
+     </div>
+    </div>
+    <div class="col-sm-4">
+     <div class="results">
+      <h1 class="title">
+       Results
+      </h1>
+      <span class="emoji">
+      </span>
+      <div class="results-data">
+       <p>
+        Hit that submit button to see your results!
+       </p>
+      </div>
+     </div>
+    </div>
+    {% for item in reports %}
+    <div class="col-sm-4">
+     <div class="results">
+      <h1 class="title">
+      This Months Budget Results
+      </h1>
+      <span class="emoji">
+      </span>
+      <div class="results-data">
+       <p>
+      {{item.data.advice}}
+       </p>
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+    {% for item in previous_reports %}
+    <div class="col-sm-4">
+     <div class="results">
+      <h1 class="title">
+      {{item.data.date}} Results
+      </h1>
+      <span class="emoji">
+      </span>
+      <div class="results-data">
+       <p>
+      {{item.data.advice}}
+       </p>
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+  <!-- partial -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/1.3.0/lib/js/emojione.min.js">
+  </script>
+  <script src="{% static 'script.js' %}">
+  </script>
+ </body>
+</html>
