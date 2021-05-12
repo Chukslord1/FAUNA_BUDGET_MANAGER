@@ -7,7 +7,7 @@ import datetime
 from django.contrib import messages
 # Create your views here.
 
-client = FaunaClient(secret="fnAEI01JP1ACAXhfMTMg4iB2TDHHTuLgLYCVxs-i")
+client = FaunaClient(secret="SECRET_KEY")
 
 def index(request):
     if request.method=="POST":
